@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TetrisGame.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource Primary}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+
+            <Image
+                Source="tetris_logo.png"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="WelcomeLabel"
+                Text="Welcome to Tetris!"
+                Style="{StaticResource Headline}"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Classic block-stacking puzzle game"
+                Style="{StaticResource SubHeadline}"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="StartBtn"
+                Text="Start Game"
+                Style="{StaticResource PrimaryButton}"
+                Command="{Binding NavigateToGameCommand}"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Instructions"
+                Style="{StaticResource SecondaryButton}"
+                Command="{Binding ShowInstructionsCommand}"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Settings"
+                Style="{StaticResource SecondaryButton}"
+                Command="{Binding ShowSettingsCommand}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="TetrisGame.Views.Controls.ScoreView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <StackLayout Spacing="5">
+        <Label Text="Score" Style="{StaticResource SmallLabel}" />
+        <Label Text="{Binding Score}" Style="{StaticResource ScoreLabel}" />
+
+        <Label Text="Level" Style="{StaticResource SmallLabel}" />
+        <Label Text="{Binding Level}" Style="{StaticResource ScoreLabel}" />
+
+        <Label Text="Lines" Style="{StaticResource SmallLabel}" />
+        <Label Text="{Binding LinesCleared}" Style="{StaticResource ScoreLabel}" />
+
+        <Label Text="Time" Style="{StaticResource SmallLabel}" />
+        <Label Text="{Binding GameTime}" Style="{StaticResource ScoreLabel}" />
+    </StackLayout>
+
+</ContentView>

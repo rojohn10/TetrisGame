@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TetrisGame.Views.GamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TetrisGame.Views.Controls"
+    Title="Tetris Game"
+    BackgroundColor="{StaticResource Secondary}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Game Header -->
+        <Grid Grid.Row="0" Padding="10" BackgroundColor="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:ScoreView 
+                Grid.Column="0"
+                Score="{Binding Score}"
+                Level="{Binding Level}"
+                LinesCleared="{Binding LinesCleared}"
+                GameTime="{Binding FormattedGameTime}" />
+
+            <StackLayout Grid.Column="1" HorizontalOptions="Center">
+                <Label 
+                    Text="{Binding GameStatusText}" 
+                    Style="{StaticResource GameStatus}"
+                    HorizontalOptions="Center" />
+                <Button 
+                    Text="Pause/Resume"
+                    Command="{Binding PauseGameCommand}"
+                    IsVisible="{Binding IsGameRunning}"
+                    Style="{StaticResource GameButton}" />
+            </StackLayout>
+
+            <controls:NextPieceView 
+                Grid.Column="2"
+                NextPiece="{Binding GameState.NextPiece}" />
+        </Grid>
+
+        <!-- Game Board -->
+        <Grid Grid.Row="1" Padding="10">
+            <controls:GameBoardView 
+                GameState="{Binding GameState}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Game Controls -->
+        <Grid Grid.Row="2" Padding="10" BackgroundColor="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Controls -->
+            <StackLayout Grid.Column="0" HorizontalOptions="Center">
+                <Button 
+                    Text="Start"
+                    Command="{Binding StartGameCommand}"
+                    IsVisible="{Binding IsGameRunning, Converter={StaticResource InvertedBoolConverter}}"
+                    Style="{StaticResource GameButton}" />
+                <Button 
+                    Text="Restart"
+                    Command="{Binding RestartGameCommand}"
+                    Style="{StaticResource GameButton}" />
+            </StackLayout>
+
+            <!-- Movement Controls -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Rotate -->
+                <Button 
+                    Grid.Row="0" Grid.Column="1"
+                    Text="↑"
+                    Command="{Binding RotateCommand}"
+                    Style="{StaticResource ControlButton}" />
+
+                <!-- Left, Down, Right -->
+                <Button 
+                    Grid.Row="1" Grid.Column="0"
+                    Text="←"
+                    Command="{Binding MoveLeftCommand}"
+                    Style="{StaticResource ControlButton}" />
+                <Button 
+                    Grid.Row="1" Grid.Column="1"
+                    Text="↓"
+                    Command="{Binding SoftDropCommand}"
+                    Style="{StaticResource ControlButton}" />
+                <Button 
+                    Grid.Row="1" Grid.Column="2"
+                    Text="→"
+                    Command="{Binding MoveRightCommand}"
+                    Style="{StaticResource ControlButton}" />
+            </Grid>
+
+            <!-- Right Controls -->
+            <StackLayout Grid.Column="2" HorizontalOptions="Center">
+                <Button 
+                    Text="Drop"
+                    Command="{Binding HardDropCommand}"
+                    Style="{StaticResource GameButton}" />
+            </StackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>
